@@ -55,6 +55,74 @@
             cursor: pointer; z-index: 10;
         }
         .logged-in .edit-image-btn { display: flex; }
+
+        /* New styles for the redesigned hero section */
+        .hero-visual {
+            position: relative;
+            width: 340px;
+            height: 340px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero-logo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            padding: 1rem;
+            z-index: 10;
+        }
+        .orbit {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid var(--dark-shadow);
+            animation: spin 15s linear infinite;
+        }
+        .orbit-1 { width: 260px; height: 260px; }
+        .orbit-2 { width: 340px; height: 340px; animation-delay: -5s; animation-direction: reverse; }
+        
+        .orbit::before, .orbit::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .orbit-1::before {
+            background: var(--primary-color);
+            top: 25px;
+            left: 25px;
+            box-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
+        }
+        
+        .orbit-1::after {
+            background: var(--accent-color);
+            bottom: 25px;
+            right: 25px;
+            box-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
+        }
+
+        .orbit-2::before {
+             background: var(--accent-color);
+             box-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
+             top: auto;
+             bottom: 15px;
+             left: 48%;
+        }
+
+        .orbit-2::after {
+             background: var(--primary-color);
+             box-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
+             top: 15px;
+             right: 48%;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
     </style>
 </head>
 <body class="antialiased">
@@ -65,7 +133,9 @@
 
         <header class="p-4 md:p-6 sticky top-0 z-50 bg-opacity-80 backdrop-blur-sm">
             <div class="container mx-auto flex justify-between items-center neumorphic px-6 py-3">
-                <h1 class="text-2xl md:text-4xl font-black" style="color: var(--text-color); text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">Fusión Ingeniería<span style="color: var(--primary-color);">.</span></h1>
+                <a href="#inicio">
+                    <img src="https://raw.githubusercontent.com/CAMILOSANCHEZDEVELOPER/FUSION-TICS-SAS/main/ChatGPT%20Image%2028%20ago%202025%2C%2012_50_04%20a.m..png" alt="Fusión Ingeniería Logo" class="h-12 w-auto">
+                </a>
                 <nav class="hidden md:flex items-center space-x-6 font-medium">
                     <a href="#inicio" class="hover:text-cyan-500 transition">Inicio</a>
                     <a href="#servicios" class="hover:text-cyan-500 transition">Servicios</a>
@@ -88,21 +158,30 @@
 
         <main class="container mx-auto px-4 py-8 md:py-16">
 
-            <section id="inicio" class="text-center min-h-[70vh] flex flex-col justify-center items-center">
-                <div class="neumorphic p-8 md:p-16 relative overflow-hidden w-full max-w-5xl">
-                    <canvas id="hero-particles-canvas" class="absolute top-0 left-0 w-full h-full z-0"></canvas>
-                    <div class="relative z-10">
-                        <h2 class="editable-text text-4xl md:text-6xl font-extrabold text-gray-800 mb-4 animated-gradient-text">
-                            Soluciones TICS para la Empresa del Futuro
-                        </h2>
-                        <p class="editable-text text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-                            Con 14 años de experiencia, transformamos su negocio con ingeniería de proyectos, consultoría y desarrollo de software a la medida en Colombia.
-                        </p>
-                        <div class="flex justify-center items-center space-x-4">
-                             <a href="https://wa.me/573163161616" target="_blank" class="neumorphic neumorphic-button bg-green-500 text-white font-bold py-3 px-6 rounded-full flex items-center space-x-3 text-lg">
-                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.31 20.62C8.75 21.41 10.36 21.82 12.04 21.82C17.5 21.82 21.95 17.37 21.95 11.91C21.95 9.27 20.94 6.83 19.22 4.99C17.5 3.15 14.96 2 12.04 2ZM9.89 8.51C10.14 8.51 10.31 8.51 10.48 8.51C10.66 8.51 10.86 8.52 11.03 8.88C11.21 9.24 11.75 10.53 11.86 10.71C11.97 10.89 12.03 11.1 11.94 11.28C11.86 11.46 11.77 11.55 11.62 11.73C11.46 11.91 11.31 12.06 11.16 12.24C11.01 12.42 10.86 12.6 11.03 12.87C11.21 13.14 11.75 13.92 12.46 14.56C13.34 15.36 14.13 15.69 14.38 15.81C14.64 15.93 14.82 15.9 14.97 15.75C15.12 15.6 15.54 15.12 15.75 14.85C15.96 14.58 16.17 14.52 16.42 14.61C16.67 14.7 17.99 15.33 18.24 15.45C18.49 15.57 18.69 15.63 18.75 15.72C18.81 15.81 18.81 16.23 18.57 16.71C18.32 17.19 17.5 17.82 16.91 17.88C16.32 17.94 15.6 17.76 14.67 17.37C13.59 16.92 12.13 16.14 10.86 14.99C9.42 13.68 8.43 12.03 8.34 11.85C8.25 11.67 7.62 10.89 7.62 10.14C7.62 9.39 8.07 8.97 8.28 8.76C8.49 8.55 8.74 8.51 8.98 8.51H9.89Z"/></svg>
-                                <span>Chatea por WhatsApp</span>
-                            </a>
+            <section id="inicio" class="min-h-[80vh] flex flex-col justify-center items-center">
+                <div class="neumorphic p-8 md:p-12 relative overflow-hidden w-full max-w-6xl">
+                     <canvas id="hero-particles-canvas" class="absolute top-0 left-0 w-full h-full z-0"></canvas>
+                    <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
+                        <div class="md:w-1/2 text-center md:text-left">
+                             <h2 class="editable-text text-4xl md:text-6xl font-extrabold text-gray-800 mb-4 animated-gradient-text">
+                                Soluciones TICS para la Empresa del Futuro
+                            </h2>
+                            <p class="editable-text text-lg md:text-xl text-gray-600 max-w-2xl mx-auto md:mx-0 mb-8">
+                                Con 14 años de experiencia, transformamos su negocio con ingeniería de proyectos, consultoría y desarrollo de software a la medida en Colombia.
+                            </p>
+                            <div class="flex justify-center md:justify-start items-center">
+                                 <a href="https://wa.me/573163161616" target="_blank" class="neumorphic neumorphic-button bg-green-500 text-white font-bold py-3 px-8 rounded-full flex items-center space-x-3 text-lg">
+                                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.31 20.62C8.75 21.41 10.36 21.82 12.04 21.82C17.5 21.82 21.95 17.37 21.95 11.91C21.95 9.27 20.94 6.83 19.22 4.99C17.5 3.15 14.96 2 12.04 2ZM9.89 8.51C10.14 8.51 10.31 8.51 10.48 8.51C10.66 8.51 10.86 8.52 11.03 8.88C11.21 9.24 11.75 10.53 11.86 10.71C11.97 10.89 12.03 11.1 11.94 11.28C11.86 11.46 11.77 11.55 11.62 11.73C11.46 11.91 11.31 12.06 11.16 12.24C11.01 12.42 10.86 12.6 11.03 12.87C11.21 13.14 11.75 13.92 12.46 14.56C13.34 15.36 14.13 15.69 14.38 15.81C14.64 15.93 14.82 15.9 14.97 15.75C15.12 15.6 15.54 15.12 15.75 14.85C15.96 14.58 16.17 14.52 16.42 14.61C16.67 14.7 17.99 15.33 18.24 15.45C18.49 15.57 18.69 15.63 18.75 15.72C18.81 15.81 18.81 16.23 18.57 16.71C18.32 17.19 17.5 17.82 16.91 17.88C16.32 17.94 15.6 17.76 14.67 17.37C13.59 16.92 12.13 16.14 10.86 14.99C9.42 13.68 8.43 12.03 8.34 11.85C8.25 11.67 7.62 10.89 7.62 10.14C7.62 9.39 8.07 8.97 8.28 8.76C8.49 8.55 8.74 8.51 8.98 8.51H9.89Z"/></svg>
+                                     <span>Chatea por WhatsApp</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 flex justify-center items-center mt-10 md:mt-0">
+                            <div class="hero-visual">
+                                <img src="https://raw.githubusercontent.com/CAMILOSANCHEZDEVELOPER/FUSION-TICS-SAS/main/ChatGPT%20Image%2028%20ago%202025%2C%2012_50_04%20a.m..png" alt="Fusión Ingeniería Logo de Presentación" class="hero-logo neumorphic">
+                                <div class="orbit orbit-1"></div>
+                                <div class="orbit orbit-2"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -214,27 +293,40 @@
 
             // --- HERO PARTICLE EFFECT SCRIPT ---
             const heroCanvas = document.getElementById('hero-particles-canvas');
-            const heroCtx = heroCanvas.getContext('2d');
-            let heroParticles = [];
-            function resizeHeroCanvas() { heroCanvas.width = heroCanvas.offsetWidth; heroCanvas.height = heroCanvas.offsetHeight; }
-            class HeroParticle {
-                constructor() { this.x = Math.random() * heroCanvas.width; this.y = Math.random() * heroCanvas.height; this.vx = (Math.random() - 0.5) * 0.8; this.vy = (Math.random() - 0.5) * 0.8; this.radius = 2; }
-                update() { this.x += this.vx; this.y += this.vy; if (this.x < 0 || this.x > heroCanvas.width) this.vx *= -1; if (this.y < 0 || this.y > heroCanvas.height) this.vy *= -1; }
-                draw() { heroCtx.beginPath(); heroCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); heroCtx.fillStyle = 'rgba(37, 42, 52, 0.5)'; heroCtx.fill(); }
-            }
-            function connectParticles() {
-                for (let a = 0; a < heroParticles.length; a++) {
-                    for (let b = a; b < heroParticles.length; b++) {
-                        const dx = heroParticles[a].x - heroParticles[b].x;
-                        const dy = heroParticles[a].y - heroParticles[b].y;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
-                        if (distance < 100) { heroCtx.beginPath(); heroCtx.moveTo(heroParticles[a].x, heroParticles[a].y); heroCtx.lineTo(heroParticles[b].x, heroParticles[b].y); heroCtx.lineWidth = 0.5; heroCtx.strokeStyle = 'rgba(37, 42, 52, 0.2)'; heroCtx.stroke(); }
+            if (heroCanvas) {
+                const heroCtx = heroCanvas.getContext('2d');
+                let heroParticles = [];
+                function resizeHeroCanvas() { 
+                    if (!heroCanvas.parentElement) return;
+                    heroCanvas.width = heroCanvas.parentElement.offsetWidth; 
+                    heroCanvas.height = heroCanvas.parentElement.offsetHeight; 
+                }
+                class HeroParticle {
+                    constructor() { this.x = Math.random() * heroCanvas.width; this.y = Math.random() * heroCanvas.height; this.vx = (Math.random() - 0.5) * 0.8; this.vy = (Math.random() - 0.5) * 0.8; this.radius = 2; }
+                    update() { this.x += this.vx; this.y += this.vy; if (this.x < 0 || this.x > heroCanvas.width) this.vx *= -1; if (this.y < 0 || this.y > heroCanvas.height) this.vy *= -1; }
+                    draw() { heroCtx.beginPath(); heroCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); heroCtx.fillStyle = 'rgba(37, 42, 52, 0.5)'; heroCtx.fill(); }
+                }
+                function connectParticles() {
+                    for (let a = 0; a < heroParticles.length; a++) {
+                        for (let b = a; b < heroParticles.length; b++) {
+                            const dx = heroParticles[a].x - heroParticles[b].x;
+                            const dy = heroParticles[a].y - heroParticles[b].y;
+                            const distance = Math.sqrt(dx * dx + dy * dy);
+                            if (distance < 100) { heroCtx.beginPath(); heroCtx.moveTo(heroParticles[a].x, heroParticles[a].y); heroCtx.lineTo(heroParticles[b].x, heroParticles[b].y); heroCtx.lineWidth = 0.5; heroCtx.strokeStyle = 'rgba(37, 42, 52, 0.2)'; heroCtx.stroke(); }
+                        }
                     }
                 }
+                function initHeroParticles() { resizeHeroCanvas(); heroParticles = []; const count = window.innerWidth < 768 ? 40 : 80; for (let i = 0; i < count; i++) heroParticles.push(new HeroParticle()); }
+                function animateHeroParticles() { heroCtx.clearRect(0, 0, heroCanvas.width, heroCanvas.height); heroParticles.forEach(p => { p.update(); p.draw(); }); connectParticles(); requestAnimationFrame(animateHeroParticles); }
+                
+                // Use a small timeout to ensure parent dimensions are calculated
+                setTimeout(() => {
+                    initHeroParticles(); 
+                    animateHeroParticles();
+                    window.addEventListener('resize', initHeroParticles);
+                }, 100);
             }
-            function initHeroParticles() { resizeHeroCanvas(); heroParticles = []; const count = window.innerWidth < 768 ? 40 : 80; for (let i = 0; i < count; i++) heroParticles.push(new HeroParticle()); }
-            function animateHeroParticles() { heroCtx.clearRect(0, 0, heroCanvas.width, heroCanvas.height); heroParticles.forEach(p => { p.update(); p.draw(); }); connectParticles(); requestAnimationFrame(animateHeroParticles); }
-            window.addEventListener('resize', initHeroParticles); initHeroParticles(); animateHeroParticles();
+
 
             // --- MOBILE MENU SCRIPT ---
             document.getElementById('mobile-menu-button').addEventListener('click', () => document.getElementById('mobile-menu').classList.toggle('hidden'));
@@ -307,3 +399,5 @@
     </script>
 </body>
 </html>
+
+
