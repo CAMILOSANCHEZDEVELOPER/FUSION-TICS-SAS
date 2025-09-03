@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fusión Ingeniería | Soluciones TICS y Consultoría Tecnológica en Colombia</title>
     <meta name="description" content="Impulsamos la transformación digital de su empresa. Fusión Ingeniería TICS S.A.S, con 14 años de experiencia en Colombia, ofrece soluciones en outsourcing de TI, desarrollo de software a medida, y consultoría tecnológica experta.">
-    <meta name="keywords" content="soluciones tics, consultoría tecnológica colombia, outsourcing ti, mantenimiento de computadores bogota, desarrollo de software para pymes, soporte ti, ingeniería de proyectos">
+    <meta name="keywords" content="soluciones tics, consultoría tecnológica colombia, outsourcing ti, mantenimiento de computadores bogota, desarrollo de software para pymes, soporte ti, ingeniería de proyectos, chatbots, automatización, power bi, asistente ia, generador mockup">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,24 +13,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #E0E5EC;
+            --bg-color: #fff0e8; /* Pastel Orange Background */
             --light-shadow: rgba(255, 255, 255, 0.8);
-            --dark-shadow: rgba(163, 177, 198, 0.7);
+            --dark-shadow: rgba(218, 195, 178, 0.7); /* Adjusted dark shadow for new bg */
             --text-color: #252A34;
             --primary-color: #08D9D6;
             --accent-color: #FF2E63;
         }
+        html { scroll-behavior: smooth; }
         body { background-color: var(--bg-color); font-family: 'Inter', sans-serif; color: var(--text-color); }
-        #aurora-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 1; filter: blur(60px); }
+        #aurora-canvas { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            z-index: -1; 
+            opacity: 1; 
+            filter: blur(40px); /* Reduced blur for more definition */
+        }
         .neumorphic { background: var(--bg-color); border-radius: 20px; box-shadow: -8px -8px 16px 0px var(--light-shadow), 8px 8px 16px 0px var(--dark-shadow); transition: all 0.3s ease-in-out; }
         .neumorphic-inset { background: var(--bg-color); border-radius: 20px; box-shadow: inset -7px -7px 14px 0px var(--light-shadow), inset 7px 7px 14px 0px var(--dark-shadow); }
         .neumorphic-button:hover { transform: translateY(-2px); box-shadow: -6px -6px 12px 0px var(--light-shadow), 6px 6px 12px 0px var(--dark-shadow); }
         .neumorphic-button:active { box-shadow: inset -5px -5px 10px 0px var(--light-shadow), inset 5px 5px 10px 0px var(--dark-shadow); transform: translateY(1px); }
         .btn-gradient { background: linear-gradient(45deg, var(--primary-color), var(--accent-color)); color: white; border: none; }
         .btn-gradient:hover { background: linear-gradient(45deg, var(--accent-color), var(--primary-color)); }
+        
         .faq-question { cursor: pointer; }
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out; }
-        .faq-item.active .faq-answer { max-height: 200px; padding-top: 1rem; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out, padding-bottom 0.5s ease-out; }
+        .faq-item.active .faq-answer { max-height: 200px; padding-bottom: 1.5rem; }
         .faq-item.active .faq-arrow { transform: rotate(180deg); color: var(--primary-color); }
         .faq-arrow { transition: transform 0.3s ease, color 0.3s ease; }
         
@@ -55,19 +66,19 @@
             cursor: pointer; z-index: 10;
         }
         .logged-in .edit-image-btn { display: flex; }
-
-        /* New styles for the redesigned hero section */
+        
+        /* --- REDESIGNED HERO SECTION --- */
         .hero-visual {
             position: relative;
-            width: 340px;
-            height: 340px;
+            width: 550px;
+            height: 550px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
         .hero-logo {
-            width: 180px;
-            height: 180px;
+            width: 330px;
+            height: 330px;
             border-radius: 50%;
             padding: 1rem;
             z-index: 10;
@@ -78,64 +89,85 @@
             border: 2px solid var(--dark-shadow);
             animation: spin 15s linear infinite;
         }
-        .orbit-1 { width: 260px; height: 260px; }
-        .orbit-2 { width: 340px; height: 340px; animation-delay: -5s; animation-direction: reverse; }
-        
-        .orbit::before, .orbit::after {
-            content: '';
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .orbit-1::before {
-            background: var(--primary-color);
-            top: 25px;
-            left: 25px;
-            box-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
-        }
-        
-        .orbit-1::after {
-            background: var(--accent-color);
-            bottom: 25px;
-            right: 25px;
-            box-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
-        }
-
-        .orbit-2::before {
-             background: var(--accent-color);
-             box-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
-             top: auto;
-             bottom: 15px;
-             left: 48%;
-        }
-
-        .orbit-2::after {
-             background: var(--primary-color);
-             box-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
-             top: 15px;
-             right: 48%;
-        }
+        .orbit-1 { width: 430px; height: 430px; }
+        .orbit-2 { width: 550px; height: 550px; animation-delay: -5s; animation-direction: reverse; }
 
         @keyframes spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
+        /* --- Floating Hologram Styles --- */
+        .background-animations {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .shape-wrapper { 
+            position: absolute; 
+            transform-style: preserve-3d;
+            animation: float 25s linear infinite;
+        }
+
+        .hologram-shape {
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--primary-color);
+            background: rgba(8, 217, 214, 0.15);
+            box-shadow: 0 0 15px var(--primary-color), 0 0 25px var(--primary-color) inset;
+            backdrop-filter: blur(3px);
+        }
+        .holo-triangle { clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
+        .holo-hexagon { clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); }
+        
+        
+        @keyframes float {
+            0% { transform: translateY(5vh) rotateX(0deg) rotateY(0deg) rotateZ(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            50% { transform: translateY(-105vh) rotateX(180deg) rotateY(180deg) rotateZ(90deg); }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-110vh) rotateX(360deg) rotateY(360deg) rotateZ(180deg); opacity: 0; }
+        }
+        
+        .form-checkbox { accent-color: var(--primary-color); }
+
+        /* Loader for mockup generator */
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 5px solid var(--primary-color);
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="antialiased">
 
     <canvas id="aurora-canvas"></canvas>
 
+    <div class="background-animations" id="background-animations-container">
+        <!-- Holograms will be generated by JS -->
+    </div>
+
     <div id="page-container" class="relative z-10">
 
         <header class="p-4 md:p-6 sticky top-0 z-50 bg-opacity-80 backdrop-blur-sm">
             <div class="container mx-auto flex justify-between items-center neumorphic px-6 py-3">
-                <a href="#inicio">
-                    <img src="https://raw.githubusercontent.com/CAMILOSANCHEZDEVELOPER/FUSION-TICS-SAS/main/ChatGPT%20Image%2028%20ago%202025%2C%2012_50_04%20a.m..png" alt="Fusión Ingeniería Logo" class="h-12 w-auto">
-                </a>
+                <span class="text-xl font-bold animated-gradient-text">Fusión Ingeniería</span>
                 <nav class="hidden md:flex items-center space-x-6 font-medium">
                     <a href="#inicio" class="hover:text-cyan-500 transition">Inicio</a>
                     <a href="#servicios" class="hover:text-cyan-500 transition">Servicios</a>
@@ -144,7 +176,7 @@
                     <a href="#faq" class="hover:text-cyan-500 transition">FAQ</a>
                 </nav>
                 <a href="#contacto" class="hidden md:block neumorphic neumorphic-button btn-gradient font-bold py-2 px-5 rounded-full transition">Contáctanos</a>
-                <button id="mobile-menu-button" class="md:hidden neumorphic neumorphic-button p-2 rounded-full"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg></button>
+                <button id="mobile-menu-button" class="md:hidden neumorphic neumorphic-button p-2 rounded-full" aria-label="Toggle mobile menu"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg></button>
             </div>
             <div id="mobile-menu" class="hidden md:hidden mt-4 neumorphic p-4">
                 <a href="#inicio" class="block py-2 text-center hover:text-cyan-500 transition">Inicio</a>
@@ -158,29 +190,27 @@
 
         <main class="container mx-auto px-4 py-8 md:py-16">
 
-            <section id="inicio" class="min-h-[80vh] flex flex-col justify-center items-center">
+            <section id="inicio" class="min-h-[85vh] flex flex-col justify-center items-center">
                 <div class="neumorphic p-8 md:p-12 relative overflow-hidden w-full max-w-6xl">
                      <canvas id="hero-particles-canvas" class="absolute top-0 left-0 w-full h-full z-0"></canvas>
-                    <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
-                        <div class="md:w-1/2 text-center md:text-left">
+                    <div class="relative z-10 flex flex-col items-center justify-center text-center gap-8">
+                        <div class="hero-visual">
+                            <img src="https://raw.githubusercontent.com/CAMILOSANCHEZDEVELOPER/FUSION-TICS-SAS/refs/heads/main/logBV.png" alt="Fusión Ingeniería Nuevo Logo" class="hero-logo neumorphic p-4">
+                            <div class="orbit orbit-1"></div>
+                            <div class="orbit orbit-2"></div>
+                        </div>
+                        <div class="max-w-3xl">
                              <h2 class="editable-text text-4xl md:text-6xl font-extrabold text-gray-800 mb-4 animated-gradient-text">
-                                Soluciones TICS para la Empresa del Futuro
+                                 Soluciones TICS para la Empresa del Futuro
                             </h2>
-                            <p class="editable-text text-lg md:text-xl text-gray-600 max-w-2xl mx-auto md:mx-0 mb-8">
+                            <p class="editable-text text-lg md:text-xl text-gray-600 mx-auto mb-8">
                                 Con 14 años de experiencia, transformamos su negocio con ingeniería de proyectos, consultoría y desarrollo de software a la medida en Colombia.
                             </p>
-                            <div class="flex justify-center md:justify-start items-center">
-                                 <a href="https://wa.me/573163161616" target="_blank" class="neumorphic neumorphic-button bg-green-500 text-white font-bold py-3 px-8 rounded-full flex items-center space-x-3 text-lg">
+                            <div class="flex justify-center items-center">
+                                 <a href="https://wa.me/573163161616" target="_blank" rel="noopener noreferrer" class="neumorphic neumorphic-button bg-green-500 text-white font-bold py-3 px-8 rounded-full flex items-center space-x-3 text-lg">
                                      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.31 20.62C8.75 21.41 10.36 21.82 12.04 21.82C17.5 21.82 21.95 17.37 21.95 11.91C21.95 9.27 20.94 6.83 19.22 4.99C17.5 3.15 14.96 2 12.04 2ZM9.89 8.51C10.14 8.51 10.31 8.51 10.48 8.51C10.66 8.51 10.86 8.52 11.03 8.88C11.21 9.24 11.75 10.53 11.86 10.71C11.97 10.89 12.03 11.1 11.94 11.28C11.86 11.46 11.77 11.55 11.62 11.73C11.46 11.91 11.31 12.06 11.16 12.24C11.01 12.42 10.86 12.6 11.03 12.87C11.21 13.14 11.75 13.92 12.46 14.56C13.34 15.36 14.13 15.69 14.38 15.81C14.64 15.93 14.82 15.9 14.97 15.75C15.12 15.6 15.54 15.12 15.75 14.85C15.96 14.58 16.17 14.52 16.42 14.61C16.67 14.7 17.99 15.33 18.24 15.45C18.49 15.57 18.69 15.63 18.75 15.72C18.81 15.81 18.81 16.23 18.57 16.71C18.32 17.19 17.5 17.82 16.91 17.88C16.32 17.94 15.6 17.76 14.67 17.37C13.59 16.92 12.13 16.14 10.86 14.99C9.42 13.68 8.43 12.03 8.34 11.85C8.25 11.67 7.62 10.89 7.62 10.14C7.62 9.39 8.07 8.97 8.28 8.76C8.49 8.55 8.74 8.51 8.98 8.51H9.89Z"/></svg>
                                      <span>Chatea por WhatsApp</span>
                                 </a>
-                            </div>
-                        </div>
-                        <div class="md:w-1/2 flex justify-center items-center mt-10 md:mt-0">
-                            <div class="hero-visual">
-                                <img src="https://raw.githubusercontent.com/CAMILOSANCHEZDEVELOPER/FUSION-TICS-SAS/main/ChatGPT%20Image%2028%20ago%202025%2C%2012_50_04%20a.m..png" alt="Fusión Ingeniería Logo de Presentación" class="hero-logo neumorphic">
-                                <div class="orbit orbit-1"></div>
-                                <div class="orbit orbit-2"></div>
                             </div>
                         </div>
                     </div>
@@ -188,14 +218,43 @@
             </section>
 
             <section id="servicios" class="py-16 md:py-24">
-                <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 animated-gradient-text">Nuestro Portafolio de Servicios TICS</h3>
+                <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 animated-gradient-text">Nuestros servicios</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                    <div class="neumorphic overflow-hidden editable-image-container"><div class="edit-image-btn"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></div><img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=600" onerror="this.onerror=null;this.src='https://placehold.co/400x250/252A34/E0E5EC?text=Desarrollo+Software';" alt="Desarrollo de Software a la Medida" class="w-full h-48 object-cover"><div class="p-6"><h4 class="editable-text text-xl font-bold mb-2">Desarrollo de Software</h4><p class="editable-text text-gray-600 text-sm">Creación de aplicaciones a la medida que optimizan procesos y generan ventajas competitivas.</p></div></div>
+                    <div class="neumorphic overflow-hidden editable-image-container"><div class="edit-image-btn"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></div><img src="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=600" onerror="this.onerror=null;this.src='https://placehold.co/400x250/252A34/E0E5EC?text=Desarrollo+Web';" alt="Desarrollo web y aplicativos a la medida" class="w-full h-48 object-cover"><div class="p-6"><h4 class="editable-text text-xl font-bold mb-2">Desarrollo web y aplicativos a la medida</h4><p class="editable-text text-gray-600 text-sm">Páginas web, CRM, sistemas de inventarios y software único para tus necesidades.</p></div></div>
+                    <div class="neumorphic overflow-hidden editable-image-container"><div class="edit-image-btn"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></div><img src="https://images.pexels.com/photos/8348923/pexels-photo-8348923.jpeg?auto=compress&cs=tinysrgb&w=600" onerror="this.onerror=null;this.src='https://placehold.co/400x250/252A34/E0E5EC?text=Chatbots';" alt="Servicio de Chatbots Semi-Humanos" class="w-full h-48 object-cover"><div class="p-6"><h4 class="editable-text text-xl font-bold mb-2">Chatbots Semi-Humanos</h4><p class="editable-text text-gray-600 text-sm">Entrenamos un chatbot para asesorar, convertir conversaciones en ventas y fidelizar a tus clientes. 24/7.</p></div></div>
+                    <div class="neumorphic overflow-hidden editable-image-container"><div class="edit-image-btn"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></div><img src="https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=600" onerror="this.onerror=null;this.src='https://placehold.co/400x250/252A34/E0E5EC?text=Datos+y+Reportes';" alt="Datos y Automatización de reportes" class="w-full h-48 object-cover"><div class="p-6"><h4 class="editable-text text-xl font-bold mb-2">Datos y Automatización</h4><p class="editable-text text-gray-600 text-sm">Podemos visualizar y automatizar reportes con herramientas como Power BI.</p></div></div>
+                    <div class="neumorphic overflow-hidden editable-image-container"><div class="edit-image-btn"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></div><img src="https://images.pexels.com/photos/7108115/pexels-photo-7108115.jpeg?auto=compress&cs=tinysrgb&w=600" onerror="this.onerror=null;this.src='https://placehold.co/400x250/252A34/E0E5EC?text=Automatizaci%C3%B3n';" alt="Automatización de Procesos" class="w-full h-48 object-cover"><div class="p-6"><h4 class="editable-text text-xl font-bold mb-2">Automatización de Procesos</h4><p class="editable-text text-gray-600 text-sm">Podemos automatizar procesos repetitivos en tu empresa para mejorar la eficiencia.</p></div></div>
                     <div class="neumorphic overflow-hidden editable-image-container"><div class="edit-image-btn"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></div><img src="https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=600" onerror="this.onerror=null;this.src='https://placehold.co/400x250/252A34/E0E5EC?text=Outsourcing+TI';" alt="Servicio de Outsourcing de TI" class="w-full h-48 object-cover"><div class="p-6"><h4 class="editable-text text-xl font-bold mb-2">Outsourcing de TI</h4><p class="editable-text text-gray-600 text-sm">Gestión experta de su infraestructura tecnológica para que usted se enfoque en su core business.</p></div></div>
                     <div class="neumorphic overflow-hidden editable-image-container"><div class="edit-image-btn"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></div><img src="https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=600" onerror="this.onerror=null;this.src='https://placehold.co/400x250/252A34/E0E5EC?text=Mantenimiento+y+Redes';" alt="Servicio de Mantenimiento y Redes" class="w-full h-48 object-cover"><div class="p-6"><h4 class="editable-text text-xl font-bold mb-2">Mantenimiento y Redes</h4><p class="editable-text text-gray-600 text-sm">Soporte preventivo y correctivo para computadores y redes, asegurando máxima operatividad.</p></div></div>
-                    <div class="neumorphic overflow-hidden editable-image-container"><div class="edit-image-btn"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></div><img src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=600" onerror="this.onerror=null;this.src='https://placehold.co/400x250/252A34/E0E5EC?text=Venta+de+Equipos';" alt="Venta de Equipos Tecnológicos" class="w-full h-48 object-cover"><div class="p-6"><h4 class="editable-text text-xl font-bold mb-2">Venta de Equipos</h4><p class="editable-text text-gray-600 text-sm">Acceso a hardware y software de punta con la mejor relación costo-beneficio del mercado.</p></div></div>
                     <div class="neumorphic overflow-hidden editable-image-container"><div class="edit-image-btn"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></div><img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=600" onerror="this.onerror=null;this.src='https://placehold.co/400x250/252A34/E0E5EC?text=Consultor%C3%ADa+TI';" alt="Servicio de Consultoría Tecnológica" class="w-full h-48 object-cover"><div class="p-6"><h4 class="editable-text text-xl font-bold mb-2">Asesoría y Consultoría</h4><p class="editable-text text-gray-600 text-sm">Orientación estratégica para alinear sus inversiones en TI con sus objetivos de negocio.</p></div></div>
-                    <div class="neumorphic overflow-hidden editable-image-container"><div class="edit-image-btn"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></div><img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=600" onerror="this.onerror=null;this.src='https://placehold.co/400x250/252A34/E0E5EC?text=Desarrollo+Software';" alt="Desarrollo de Software a la Medida" class="w-full h-48 object-cover"><div class="p-6"><h4 class="editable-text text-xl font-bold mb-2">Desarrollo de Software</h4><p class="editable-text text-gray-600 text-sm">Creación de aplicaciones a la medida que optimizan procesos y generan ventajas competitivas.</p></div></div>
-                    <div class="neumorphic overflow-hidden editable-image-container"><div class="edit-image-btn"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></div><img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=600" onerror="this.onerror=null;this.src='https://placehold.co/400x250/252A34/E0E5EC?text=Proyectos+TICS';" alt="Gestión de Proyectos TICS" class="w-full h-48 object-cover"><div class="p-6"><h4 class="editable-text text-xl font-bold mb-2" style="color: var(--accent-color);">Cierre el Trato</h4><p class="editable-text text-gray-600 text-sm font-semibold">Nuestra experiencia certificada le brinda la tranquilidad que su empresa necesita para innovar.</p></div></div>
+                    <div class="neumorphic overflow-hidden editable-image-container"><div class="edit-image-btn"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></div><img src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=600" onerror="this.onerror=null;this.src='https://placehold.co/400x250/252A34/E0E5EC?text=Venta+de+Equipos';" alt="Venta de Equipos Tecnológicos" class="w-full h-48 object-cover"><div class="p-6"><h4 class="editable-text text-xl font-bold mb-2">Venta de Equipos</h4><p class="editable-text text-gray-600 text-sm">Acceso a hardware y software de punta con la mejor relación costo-beneficio del mercado.</p></div></div>
+                </div>
+            </section>
+            
+            <section id="ai-assistant" class="py-16 md:py-24">
+                <div class="neumorphic p-8 md:p-12">
+                    <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+                        <div class="md:w-2/5 flex-shrink-0">
+                            <img src="https://raw.githubusercontent.com/CAMILOSANCHEZDEVELOPER/FUSION-TICS-SAS/refs/heads/main/Asistente%20IA.png" alt="Asistente de Inteligencia Artificial" class="rounded-2xl w-full h-auto neumorphic p-2">
+                        </div>
+                        <div class="md:w-3/5 text-center md:text-left">
+                            <h3 class="text-3xl md:text-4xl font-bold mb-2 animated-gradient-text">Refina y desarrolla tus ideas con nuestro asistente de IA</h3>
+                            <p class="text-xl font-bold mb-6" style="color: var(--accent-color);">¡¡ ES GRATIS !!</p>
+                            <h4 class="text-2xl font-bold mb-4">Refina y complementa tus ideas con IA</h4>
+                            <p class="text-gray-600 mb-6">
+                                Usa esta herramienta para construir y complementar tus ideas. Nuestra IA cuidadosamente entrenada para este fin te sugerirá las tecnologías más óptimas para tu proyecto, dándonos el punto de partida perfecto para construir una solución personalizada y re potencializada para ti.
+                            </p>
+                            <div class="neumorphic-inset p-4">
+                                <textarea id="ai-prompt" rows="5" class="w-full p-3 bg-transparent focus:outline-none text-gray-700 placeholder-gray-500" placeholder="Describe tu idea o proyecto aquí... (ej: 'Quiero crear una tienda online para vender artesanías')"></textarea>
+                                <button id="ai-submit" class="w-full mt-4 neumorphic neumorphic-button btn-gradient font-bold py-3 px-6 rounded-full transition">Obtener Sugerencias</button>
+                            </div>
+                            <div id="ai-response-container" class="mt-6 text-left p-6 neumorphic" style="display: none;">
+                                <h5 class="text-xl font-bold mb-3">Sugerencias de la IA:</h5>
+                                <div id="ai-response" class="text-gray-600 space-y-2"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -213,6 +272,20 @@
                  </div>
             </section>
             
+            <!-- Insights Section -->
+            <section id="insights" class="py-16 md:py-24">
+                <div class="neumorphic p-8 md:p-12">
+                    <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 animated-gradient-text">Resultados que Impulsan el Crecimiento</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 text-center">
+                        <div class="p-4"><p class="text-4xl lg:text-5xl font-bold" style="color: var(--primary-color);">98%</p><p class="mt-2 text-gray-600 font-medium">Cumplimiento de Entrega</p></div>
+                        <div class="p-4"><p class="text-4xl lg:text-5xl font-bold" style="color: var(--primary-color);">+35%</p><p class="mt-2 text-gray-600 font-medium">Aumento de Productividad</p></div>
+                        <div class="p-4"><p class="text-4xl lg:text-5xl font-bold" style="color: var(--accent-color);">-40%</p><p class="mt-2 text-gray-600 font-medium">Reducción de Errores</p></div>
+                        <div class="p-4"><p class="text-4xl lg:text-5xl font-bold" style="color: var(--primary-color);">95%</p><p class="mt-2 text-gray-600 font-medium">Satisfacción del Cliente</p></div>
+                        <div class="p-4"><p class="text-4xl lg:text-5xl font-bold" style="color: var(--accent-color);">-25%</p><p class="mt-2 text-gray-600 font-medium">Reducción de Costos</p></div>
+                    </div>
+                </div>
+            </section>
+
             <section id="recomendaciones" class="py-16 md:py-24">
                 <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 animated-gradient-text">Lo que dicen nuestros clientes</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
@@ -240,9 +313,9 @@
             <section id="faq" class="py-16 md:py-24 max-w-4xl mx-auto">
                 <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 animated-gradient-text">Preguntas Frecuentes</h3>
                 <div class="space-y-6">
-                    <div class="faq-item neumorphic p-6"><div class="faq-question flex justify-between items-center"><h4 class="editable-text text-lg font-semibold">¿Qué tipo de servicios de software ofrecen?</h4><div class="faq-arrow neumorphic-button rounded-full p-1"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></div></div><div class="faq-answer"><p class="editable-text text-gray-600">Nos especializamos en el mantenimiento, diseño y creación de aplicaciones y software a la medida, adaptándonos completamente a los requerimientos y procesos de su negocio para maximizar la eficiencia.</p></div></div>
-                    <div class="faq-item neumorphic p-6"><div class="faq-question flex justify-between items-center"><h4 class="editable-text text-lg font-semibold">¿Cómo garantizan la calidad de su personal?</h4><div class="faq-arrow neumorphic-button rounded-full p-1"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></div></div><div class="faq-answer"><p class="editable-text text-gray-600">Nuestro equipo está compuesto por profesionales de ingeniería con amplia experiencia y certificaciones en el área de TI. Realizamos una rigurosa selección para asegurar que solo el personal más idóneo trabaje en sus proyectos.</p></div></div>
-                    <div class="faq-item neumorphic p-6"><div class="faq-question flex justify-between items-center"><h4 class="editable-text text-lg font-semibold">¿Sus soluciones se adaptan a pymes?</h4><div class="faq-arrow neumorphic-button rounded-full p-1"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></div></div><div class="faq-answer"><p class="editable-text text-gray-600">¡Absolutamente! Creemos en la democratización de la tecnología. Diseñamos soluciones escalables y personalizadas que se ajustan a las necesidades y presupuestos tanto de PYMES como de grandes corporaciones.</p></div></div>
+                    <div class="faq-item neumorphic"><button class="faq-question w-full flex justify-between items-center text-left p-6"><h4 class="editable-text text-lg font-semibold">¿Qué tipo de servicios de software ofrecen?</h4><span class="faq-arrow neumorphic-button rounded-full p-1 shrink-0"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></span></button><div class="faq-answer px-6"><p class="editable-text text-gray-600">Nos especializamos en el mantenimiento, diseño y creación de aplicaciones y software a la medida, adaptándonos completamente a los requerimientos y procesos de su negocio para maximizar la eficiencia.</p></div></div>
+                    <div class="faq-item neumorphic"><button class="faq-question w-full flex justify-between items-center text-left p-6"><h4 class="editable-text text-lg font-semibold">¿Cómo garantizan la calidad de su personal?</h4><span class="faq-arrow neumorphic-button rounded-full p-1 shrink-0"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></span></button><div class="faq-answer px-6"><p class="editable-text text-gray-600">Nuestro equipo está compuesto por profesionales de ingeniería con amplia experiencia y certificaciones en el área de TI. Realizamos una rigurosa selección para asegurar que solo el personal más idóneo trabaje en sus proyectos.</p></div></div>
+                    <div class="faq-item neumorphic"><button class="faq-question w-full flex justify-between items-center text-left p-6"><h4 class="editable-text text-lg font-semibold">¿Sus soluciones se adaptan a pymes?</h4><span class="faq-arrow neumorphic-button rounded-full p-1 shrink-0"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></span></button><div class="faq-answer px-6"><p class="editable-text text-gray-600">¡Absolutamente! Creemos en la democratización de la tecnología. Diseñamos soluciones escalables y personalizadas que se ajustan a las necesidades y presupuestos tanto de PYMES como de grandes corporaciones.</p></div></div>
                 </div>
             </section>
 
@@ -250,7 +323,7 @@
                 <div class="neumorphic p-8 md:p-12">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                         <div><h3 class="text-3xl font-bold mb-4 animated-gradient-text">Iniciemos su Próximo Proyecto</h3><p class="text-gray-600 mb-8">Contáctenos. Nuestro equipo de consultores está listo para atenderle y diseñar un plan tecnológico a su medida.</p><div class="space-y-4"><p class="flex items-center space-x-3"><svg class="w-6 h-6" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg><a href="mailto:ventasfusiontics@gmail.com" class="hover:text-cyan-500">ventasfusiontics@gmail.com</a></p><p class="flex items-center space-x-3"><svg class="w-6 h-6" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg><a href="tel:+573163161616" class="hover:text-cyan-500">+57 316 316 1616</a></p><p class="flex items-center space-x-3"><svg class="w-6 h-6" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Horario: Atención con cita previa</span></p></div></div>
-                        <form><div class="space-y-6"><div><label for="nombre" class="block text-sm font-medium text-gray-700 mb-2">Nombre</label><input type="text" id="nombre" name="nombre" class="w-full p-3 neumorphic-inset focus:outline-none focus:ring-2" style="--tw-ring-color: var(--primary-color);"></div><div><label for="email" class="block text-sm font-medium text-gray-700 mb-2">Correo electrónico*</label><input type="email" id="email" name="email" required class="w-full p-3 neumorphic-inset focus:outline-none focus:ring-2" style="--tw-ring-color: var(--primary-color);"></div><div><label for="mensaje" class="block text-sm font-medium text-gray-700 mb-2">Mensaje</label><textarea id="mensaje" name="mensaje" rows="4" class="w-full p-3 neumorphic-inset focus:outline-none focus:ring-2" style="--tw-ring-color: var(--primary-color);"></textarea></div><div><button type="submit" class="w-full neumorphic neumorphic-button btn-gradient font-bold py-3 px-6 rounded-full transition">Enviar Mensaje</button></div></div></form>
+                        <form id="contact-form"><div class="space-y-6"><div><label for="nombre" class="block text-sm font-medium text-gray-700 mb-2">Nombre</label><input type="text" id="nombre" name="nombre" class="w-full p-3 neumorphic-inset focus:outline-none focus:ring-2" style="--tw-ring-color: var(--primary-color);"></div><div><label for="email" class="block text-sm font-medium text-gray-700 mb-2">Correo electrónico*</label><input type="email" id="email" name="email" required class="w-full p-3 neumorphic-inset focus:outline-none focus:ring-2" style="--tw-ring-color: var(--primary-color);"></div><div><label for="mensaje" class="block text-sm font-medium text-gray-700 mb-2">Mensaje</label><textarea id="mensaje" name="mensaje" rows="4" class="w-full p-3 neumorphic-inset focus:outline-none focus:ring-2" style="--tw-ring-color: var(--primary-color);"></textarea></div><div class="flex items-center"><input type="checkbox" id="politicas" name="politicas" required class="form-checkbox h-5 w-5 rounded"><label for="politicas" class="ml-2 text-sm text-gray-600">Acepto las políticas de tratamiento de datos.</label></div><div><button type="submit" id="submit-contact-btn" class="w-full neumorphic neumorphic-button btn-gradient font-bold py-3 px-6 rounded-full transition">Enviar Mensaje</button></div><div id="form-status" class="mt-4 text-center font-medium h-5"></div></div></form>
                     </div>
                 </div>
             </section>
@@ -262,32 +335,92 @@
         </footer>
     </div>
 
-    <!-- Login Modal -->
+    <!-- Modals -->
     <div id="login-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
         <div class="neumorphic p-8 rounded-lg text-center w-80">
             <h3 class="text-xl font-bold mb-4">Acceso de Administrador</h3>
-            <input type="password" id="password-input" placeholder="Contraseña" class="w-full p-3 neumorphic-inset mb-4 focus:outline-none focus:ring-2" style="--tw-ring-color: var(--primary-color);">
-            <button id="submit-login-btn" class="w-full neumorphic neumorphic-button btn-gradient font-bold py-2 px-6 rounded-full transition">Ingresar</button>
-            <button id="close-login-btn" class="mt-2 text-xs text-gray-500">Cerrar</button>
+            <input type="password" id="password-input" placeholder="Contraseña" class="w-full p-3 neumorphic-inset mb-2 focus:outline-none focus:ring-2" style="--tw-ring-color: var(--primary-color);">
+            <p id="login-error" class="text-red-500 text-sm h-5 flex items-center justify-center"></p>
+            <button id="submit-login-btn" class="w-full mt-2 neumorphic neumorphic-button btn-gradient font-bold py-2 px-6 rounded-full transition">Ingresar</button>
+            <button id="close-login-btn" class="mt-4 text-xs text-gray-500">Cerrar</button>
         </div>
     </div>
     
-    <!-- Hidden file input for image editing -->
+    <div id="mockup-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="neumorphic p-8 rounded-lg text-center w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <h3 class="text-2xl font-bold mb-4 animated-gradient-text">Generador de Mockups con IA</h3>
+            <p class="text-gray-600 mb-6">Describe la interfaz de software que imaginas y nuestra IA creará un mockup visual para ti.</p>
+            <div class="neumorphic-inset p-4">
+                 <textarea id="mockup-prompt" rows="4" class="w-full p-3 bg-transparent focus:outline-none text-gray-700 placeholder-gray-500" placeholder="Ej: 'Una pantalla de inicio de sesión para una app de música, con un fondo oscuro y botones de neón...'"></textarea>
+                 <button id="mockup-submit" class="w-full mt-4 neumorphic neumorphic-button btn-gradient font-bold py-3 px-6 rounded-full transition">Generar Mockup</button>
+            </div>
+            <div id="mockup-result-container" class="mt-6">
+                <div id="mockup-loader" class="hidden justify-center items-center p-8">
+                    <div class="loader"></div>
+                </div>
+                <div id="mockup-output" class="hidden">
+                    <img id="mockup-image" src="" alt="Mockup generado por IA" class="w-full h-auto rounded-lg neumorphic p-1">
+                </div>
+            </div>
+            <button id="close-mockup-btn" class="mt-6 text-sm text-gray-500">Cerrar</button>
+        </div>
+    </div>
+
     <input type="file" id="image-upload-input" class="hidden" accept="image/*">
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- DYNAMIC BACKGROUND HOLOGRAPHIC SHAPES ---
+            const container = document.getElementById('background-animations-container');
+            const numShapes = 20; 
+            const shapeClasses = ['', 'holo-triangle', 'holo-hexagon']; // '' is for square
+
+            for (let i = 0; i < numShapes; i++) {
+                const shapeWrapper = document.createElement('div');
+                shapeWrapper.className = 'shape-wrapper';
+                
+                const shape = document.createElement('div');
+                const randomShapeClass = shapeClasses[Math.floor(Math.random() * shapeClasses.length)];
+                shape.className = 'hologram-shape ' + randomShapeClass;
+                
+                const size = Math.random() * 80 + 40; // 40px to 120px
+                const duration = Math.random() * 20 + 20; // 20s to 40s
+                const delay = Math.random() * -25;
+                const startPos = Math.random() * 100;
+                
+                shapeWrapper.style.width = `${size}px`;
+                shapeWrapper.style.height = `${size}px`;
+                shapeWrapper.style.top = '110vh';
+                shapeWrapper.style.left = `${startPos}vw`;
+                shapeWrapper.style.animation = `float ${duration}s linear ${delay}s infinite`;
+
+                shapeWrapper.appendChild(shape);
+                container.appendChild(shapeWrapper);
+            }
+
             // --- AURORA EFFECT SCRIPT ---
             const auroraCanvas = document.getElementById('aurora-canvas');
             const auroraCtx = auroraCanvas.getContext('2d');
             let auroraParticles = [];
             function resizeAurora() { auroraCanvas.width = window.innerWidth; auroraCanvas.height = window.innerHeight; }
             class AuroraParticle {
-                constructor() { this.x = Math.random() * window.innerWidth; this.y = Math.random() * window.innerHeight; this.vx = (Math.random() - 0.5) * 0.5; this.vy = (Math.random() - 0.5) * 0.5; this.radius = Math.random() * 150 + 120; const hue = Math.random() > 0.9 ? Math.random() * 40 + 240 : Math.random() * 60 + 170; this.color = `hsla(${hue}, 80%, 60%, 0.30)`; }
+                constructor() {
+                    this.x = Math.random() * window.innerWidth;
+                    this.y = Math.random() * window.innerHeight;
+                    this.vx = (Math.random() - 0.5) * 1.2; // Faster movement
+                    this.vy = (Math.random() - 0.5) * 1.2; // Faster movement
+                    this.radius = Math.random() * 200 + 150;
+                    const isOrange = Math.random() > 0.2;
+                    const hue = isOrange ? Math.random() * 25 + 15 : 25; 
+                    const saturation = isOrange ? 95 : 40; 
+                    const lightness = isOrange ? 55 : 95; // Deeper orange
+                    const opacity = isOrange ? 0.7 : 0.85; // More opaque
+                    this.color = `hsla(${hue}, ${saturation}%, ${lightness}%, ${opacity})`;
+                }
                 update() { this.x += this.vx; this.y += this.vy; if (this.x < -this.radius || this.x > window.innerWidth + this.radius) this.vx *= -1; if (this.y < -this.radius || this.y > window.innerHeight + this.radius) this.vy *= -1; }
                 draw() { auroraCtx.beginPath(); const gradient = auroraCtx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius); gradient.addColorStop(0, this.color); gradient.addColorStop(1, `hsla(0, 0%, 100%, 0)`); auroraCtx.fillStyle = gradient; auroraCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); auroraCtx.fill(); }
             }
-            function initAurora() { resizeAurora(); auroraParticles = []; const count = window.innerWidth < 768 ? 30 : 40; for (let i = 0; i < count; i++) auroraParticles.push(new AuroraParticle()); }
+            function initAurora() { resizeAurora(); auroraParticles = []; const count = window.innerWidth < 768 ? 25 : 35; for (let i = 0; i < count; i++) auroraParticles.push(new AuroraParticle()); }
             function animateAurora() { auroraCtx.clearRect(0, 0, window.innerWidth, window.innerHeight); auroraParticles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateAurora); }
             window.addEventListener('resize', initAurora); initAurora(); animateAurora();
 
@@ -319,7 +452,6 @@
                 function initHeroParticles() { resizeHeroCanvas(); heroParticles = []; const count = window.innerWidth < 768 ? 40 : 80; for (let i = 0; i < count; i++) heroParticles.push(new HeroParticle()); }
                 function animateHeroParticles() { heroCtx.clearRect(0, 0, heroCanvas.width, heroCanvas.height); heroParticles.forEach(p => { p.update(); p.draw(); }); connectParticles(); requestAnimationFrame(animateHeroParticles); }
                 
-                // Use a small timeout to ensure parent dimensions are calculated
                 setTimeout(() => {
                     initHeroParticles(); 
                     animateHeroParticles();
@@ -327,17 +459,113 @@
                 }, 100);
             }
 
+            // --- AI ASSISTANT SCRIPT ---
+            const aiSubmitBtn = document.getElementById('ai-submit');
+            const aiPrompt = document.getElementById('ai-prompt');
+            const aiResponseContainer = document.getElementById('ai-response-container');
+            const aiResponse = document.getElementById('ai-response');
+
+            aiSubmitBtn.addEventListener('click', () => {
+                const promptText = aiPrompt.value;
+                if (promptText.trim() === '') {
+                    aiResponse.innerHTML = '<p>Por favor, describe tu idea para recibir sugerencias.</p>';
+                    aiResponseContainer.style.display = 'block';
+                    return;
+                }
+
+                aiSubmitBtn.textContent = 'Pensando...';
+                aiSubmitBtn.disabled = true;
+
+                setTimeout(() => {
+                    const responseHtml = `
+                        <p><strong>¡Excelente idea!</strong> Para un proyecto como <strong>'${promptText}'</strong>, te recomendamos las siguientes tecnologías:</p>
+                        <ul>
+                            <li class="mt-2">- <strong>Frontend:</strong> React o Vue.js para una interfaz de usuario dinámica y moderna.</li>
+                            <li class="mt-2">- <strong>Backend:</strong> Node.js con Express por su rapidez y escalabilidad.</li>
+                            <li class="mt-2">- <strong>Base de Datos:</strong> PostgreSQL si necesitas relaciones complejas, o MongoDB para mayor flexibilidad.</li>
+                        </ul>
+                        <p class="mt-4">Este es un excelente punto de partida. ¡Hablemos para adaptarlo a tus necesidades!</p>
+                    `;
+                    aiResponse.innerHTML = responseHtml;
+                    aiResponseContainer.style.display = 'block';
+                    aiSubmitBtn.textContent = 'Obtener Sugerencias';
+                    aiSubmitBtn.disabled = false;
+                }, 1500);
+            });
+
 
             // --- MOBILE MENU SCRIPT ---
             document.getElementById('mobile-menu-button').addEventListener('click', () => document.getElementById('mobile-menu').classList.toggle('hidden'));
 
             // --- FAQ SCRIPT ---
             document.querySelectorAll('.faq-item').forEach(item => {
-                item.querySelector('.faq-question').addEventListener('click', () => {
-                    const isActive = item.classList.contains('active');
-                    document.querySelectorAll('.faq-item').forEach(other => other.classList.remove('active'));
-                    if (!isActive) item.classList.add('active');
+                const questionButton = item.querySelector('.faq-question');
+                if (questionButton) {
+                    questionButton.addEventListener('click', () => {
+                        const isActive = item.classList.contains('active');
+                        document.querySelectorAll('.faq-item').forEach(other => {
+                            if (other !== item) other.classList.remove('active');
+                        });
+                        item.classList.toggle('active', !isActive);
+                    });
+                }
+            });
+            
+            // --- CONTACT FORM & MOCKUP MODAL SCRIPT ---
+            const contactForm = document.getElementById('contact-form');
+            const mockupModal = document.getElementById('mockup-modal');
+            const mockupPrompt = document.getElementById('mockup-prompt');
+            const formStatus = document.getElementById('form-status');
+            const closeMockupBtn = document.getElementById('close-mockup-btn');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    formStatus.textContent = '';
+                    const politicas = document.getElementById('politicas');
+                    if (!politicas.checked) {
+                        formStatus.textContent = 'Debes aceptar las políticas de tratamiento de datos.';
+                        formStatus.style.color = 'var(--accent-color)';
+                        return;
+                    }
+                    const message = document.getElementById('mensaje').value;
+                    mockupPrompt.value = message; // Pass message to mockup generator
+                    mockupModal.classList.remove('hidden');
                 });
+            }
+            
+            closeMockupBtn.addEventListener('click', () => {
+                mockupModal.classList.add('hidden');
+                // Clear form and show success message on main page
+                contactForm.reset();
+                formStatus.textContent = '¡Gracias! Su mensaje fue recibido.';
+                formStatus.style.color = 'var(--primary-color)';
+                setTimeout(() => { formStatus.textContent = ''; }, 5000);
+            });
+
+            // --- MOCKUP GENERATOR SCRIPT ---
+            const mockupSubmit = document.getElementById('mockup-submit');
+            const mockupLoader = document.getElementById('mockup-loader');
+            const mockupOutput = document.getElementById('mockup-output');
+            const mockupImage = document.getElementById('mockup-image');
+
+            mockupSubmit.addEventListener('click', () => {
+                const prompt = mockupPrompt.value.trim();
+                if (!prompt) return;
+
+                mockupLoader.style.display = 'flex';
+                mockupOutput.style.display = 'none';
+                mockupSubmit.disabled = true;
+                mockupSubmit.textContent = 'Generando...';
+
+                setTimeout(() => {
+                    const imageUrl = `https://placehold.co/800x600/252A34/E0E5EC?text=Mockup+de+\n${encodeURIComponent(prompt)}`;
+                    mockupImage.src = imageUrl;
+                    mockupLoader.style.display = 'none';
+                    mockupOutput.style.display = 'block';
+                    mockupSubmit.disabled = false;
+                    mockupSubmit.textContent = 'Generar Otro Mockup';
+                }, 2000);
             });
 
             // --- LOGIN & EDITING SCRIPT ---
@@ -348,33 +576,45 @@
             const passwordInput = document.getElementById('password-input');
             const pageContainer = document.getElementById('page-container');
             const imageUploadInput = document.getElementById('image-upload-input');
+            const loginError = document.getElementById('login-error');
             let currentImageToEdit = null;
 
             function enableEditing() {
                 pageContainer.classList.add('logged-in');
                 document.querySelectorAll('.editable-text').forEach(el => el.contentEditable = 'true');
-                loginBtn.textContent = 'Logout';
-                loginBtn.id = 'logout-btn';
-                document.getElementById('logout-btn').addEventListener('click', disableEditing);
+                const currentLoginBtn = document.getElementById('login-btn') || document.getElementById('logout-btn');
+                currentLoginBtn.textContent = 'Logout';
+                currentLoginBtn.id = 'logout-btn';
+                currentLoginBtn.removeEventListener('click', showLoginModal);
+                currentLoginBtn.addEventListener('click', disableEditing);
                 loginModal.classList.add('hidden');
             }
 
             function disableEditing() {
                 pageContainer.classList.remove('logged-in');
                 document.querySelectorAll('.editable-text').forEach(el => el.contentEditable = 'false');
-                const logoutBtn = document.getElementById('logout-btn');
-                logoutBtn.textContent = 'Admin Login';
-                logoutBtn.id = 'login-btn';
-                logoutBtn.addEventListener('click', () => loginModal.classList.remove('hidden'));
+                const currentLogoutBtn = document.getElementById('logout-btn') || document.getElementById('login-btn');
+                currentLogoutBtn.textContent = 'Admin Login';
+                currentLogoutBtn.id = 'login-btn';
+                currentLogoutBtn.removeEventListener('click', disableEditing);
+                currentLogoutBtn.addEventListener('click', showLoginModal);
+            }
+            
+            function showLoginModal() {
+                 loginModal.classList.remove('hidden');
+                 passwordInput.value = '';
+                 if(loginError) loginError.textContent = '';
             }
 
-            loginBtn.addEventListener('click', () => loginModal.classList.remove('hidden'));
+            loginBtn.addEventListener('click', showLoginModal);
             closeLoginBtn.addEventListener('click', () => loginModal.classList.add('hidden'));
+            
             submitLoginBtn.addEventListener('click', () => {
+                if(loginError) loginError.textContent = '';
                 if (passwordInput.value === '6969') {
                     enableEditing();
                 } else {
-                    alert('Contraseña incorrecta.');
+                    if(loginError) loginError.textContent = 'Contraseña incorrecta.';
                 }
                 passwordInput.value = '';
             });
@@ -399,5 +639,4 @@
     </script>
 </body>
 </html>
-
 
